@@ -12,7 +12,7 @@ wire [width-1:0]	result_data;
 reg					input_ready;
 wire				input_available;
 
-reg [width*4-1:0]	A_line={8'd24,8'd105,8'd894,8'd679850};	//循环求四组数据的公约数
+reg [width*4-1:0]	A_line={8'd24,8'd105,8'd894,8'd12};	//循环求四组数据的公约数
 reg [width*4-1:0]	B_line={8'd18,8'd99,8'd18,8'd66};		//循环求四组数据的公约数
 reg [width*4-1:0]	result_line;							//存储四组数据的计算结果
 
@@ -30,8 +30,6 @@ top  top_u
 	.result_taken(result_taken)
 );
 
-always #10 sys_clk = !sys_clk;
-
 initial 
 	begin
 	sys_clk = 1;
@@ -39,6 +37,8 @@ initial
 	$stop;
 	end
 	
+always #10 sys_clk = !sys_clk;
+
 //当接收到计算完成标志后，将result_data存储进result_line，
 //并在一定延时后拉高result_taken，使状态机进入READY状态
 always@(posedge result_rdy)

@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 module calc #(parameter  width = 8)
 (
+	input 				clk,
 	input 	[width-1:0] operand_A,		//输入计算数A
 	input 	[width-1:0] operand_B,		//输入计算数B
 	input				A_en,			//A的触发器触发信号，上升沿触发
@@ -61,28 +62,24 @@ always@(*)
 	end
 	
 //A_D触发器的代码
-always@(posedge A_en)
+always@(clk)
 	begin
     if(A_en)
 		begin
-		#1
 		DA_out 			= DA_in;
 		end
 	else
-		#1
 		DA_out 			= DA_out;
 	end
 		
 //B_D触发器的代码
-always@(posedge B_en)
+always@(clk)
 	begin
     if(B_en)
 		begin
-		#1
 		DB_out			= DB_in;
 		end
 	else
-		#1
 		DB_out 			= DB_out;
 	end
 	

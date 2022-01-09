@@ -36,6 +36,7 @@ state_ctrl U_state_ctrl(
 );
 
 calc U_calc(
+	.clk			(sys_clk),
 	.operand_A		(operand_A),		
 	.operand_B		(operand_B),			
 	.A_en			(A_en),	
